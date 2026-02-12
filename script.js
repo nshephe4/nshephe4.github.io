@@ -153,6 +153,9 @@ function displayPage() {
         const url = new URL(window.location);
         url.searchParams.set('page', currentPage);
         window.history.pushState({}, '', url);
+        
+        // Preload next page for faster navigation
+        preloadNextPage();
     };
     
     img.onerror = () => {
@@ -195,10 +198,3 @@ function preloadNextPage() {
         img.src = nextPageSrc;
     }
 }
-
-// Call preload after displaying a page
-const originalDisplayPage = displayPage;
-displayPage = function() {
-    originalDisplayPage();
-    setTimeout(preloadNextPage, 100);
-};

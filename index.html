@@ -28,6 +28,11 @@
     <script>
         // Load manga data and display on homepage
         loadMangaData().then(data => {
+            if (!data) {
+                document.getElementById('manga-title').textContent = 'Error loading manga data';
+                return;
+            }
+            
             document.getElementById('manga-title').textContent = data.mangaTitle;
             document.getElementById('manga-cover').src = data.mangaCover;
             
@@ -47,6 +52,9 @@
                 };
                 chaptersList.appendChild(chapterCard);
             });
+        }).catch(error => {
+            console.error('Error loading manga data:', error);
+            document.getElementById('manga-title').textContent = 'Error loading manga data';
         });
     </script>
 </body>
