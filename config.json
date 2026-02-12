@@ -1,0 +1,18 @@
+{
+  "mangaTitle": "Sample Manga Series",
+  "mangaCover": "manga/chapter-1/page-1.svg",
+  "chapters": [
+    {
+      "id": 1,
+      "title": "Chapter 1: The Beginning",
+      "thumbnail": "manga/chapter-1/page-1.svg",
+      "pages": [
+        "manga/chapter-1/page-1.svg",
+        "manga/chapter-1/page-2.svg",
+        "manga/chapter-1/page-3.svg",
+        "manga/chapter-1/page-4.svg",
+        "manga/chapter-1/page-5.svg"
+      ]
+    }
+  ]
+}
