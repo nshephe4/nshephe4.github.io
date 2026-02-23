@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manga Reader</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="manga-title">Loading...</h1>
+        </header>
+        
+        <div class="cover-section">
+            <img id="manga-cover" src="" alt="Manga Cover" class="cover-image">
+        </div>
+        
+        <div class="chapters-section">
+            <h2>Chapters</h2>
+            <div id="chapters-list" class="chapters-grid">
+                <!-- Chapters will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        // Load manga data and display on homepage
+        loadMangaData().then(data => {
+            if (!data) {
+                document.getElementById('manga-title').textContent = 'Error loading manga data';
+                return;
+            }
+            
+            document.getElementById('manga-title').textContent = data.mangaTitle;
+            document.getElementById('manga-cover').src = data.mangaCover;
+            
+            const chaptersList = document.getElementById('chapters-list');
+            data.chapters.forEach(chapter => {
+                const chapterCard = document.createElement('div');
+                chapterCard.className = 'chapter-card';
+                chapterCard.innerHTML = `
+                    <img src="${chapter.thumbnail}" alt="${chapter.title}" class="chapter-thumbnail">
+                    <div class="chapter-info">
+                        <h3>${chapter.title}</h3>
+                        <p>${chapter.pages.length} pages</p>
+                    </div>
+                `;
+                chapterCard.onclick = () => {
+                    window.location.href = `reader.html?chapter=${chapter.id}`;
+                };
+                chaptersList.appendChild(chapterCard);
+            });
+        }).catch(error => {
+            console.error('Error loading manga data:', error);
+            document.getElementById('manga-title').textContent = 'Error loading manga data';
+        });
+    </script>
+</body>
+</html>

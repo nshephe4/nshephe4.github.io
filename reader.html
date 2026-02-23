@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manga Reader</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="reader-body">
+    <div class="reader-container">
+        <!-- Navigation Bar -->
+        <div class="reader-nav">
+            <button id="home-btn" class="nav-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                Home
+            </button>
+            
+            <div class="page-info">
+                <span id="page-counter">Page 1 of 1</span>
+            </div>
+            
+            <div class="nav-controls">
+                <button id="prev-btn" class="nav-btn" disabled>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                    Prev
+                </button>
+                <button id="next-btn" class="nav-btn">
+                    Next
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Reader Content Area -->
+        <div class="reader-content" id="reader-content">
+            <!-- Click zones for navigation -->
+            <div class="click-zone click-zone-left" id="click-prev"></div>
+            <div class="click-zone click-zone-right" id="click-next"></div>
+            
+            <!-- Manga page image -->
+            <img id="manga-page" src="" alt="Manga Page" class="manga-page">
+        </div>
+        
+        <!-- Loading indicator -->
+        <div id="loading-indicator" class="loading-indicator">
+            <div class="spinner"></div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        // Initialize reader
+        const urlParams = new URLSearchParams(window.location.search);
+        const chapterId = parseInt(urlParams.get('chapter')) || 1;
+        const startPage = parseInt(urlParams.get('page')) || 0;
+        
+        initReader(chapterId, startPage);
+    </script>
+</body>
+</html>
